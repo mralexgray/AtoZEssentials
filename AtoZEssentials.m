@@ -1,8 +1,20 @@
 
 
-#import "AtoZEssenrtials.h"
+#import "AtoZEssentials.h"
 //#import "NSObject+AssociatedObjects.h"
 #import <objc/runtime.h>
+
+
+
+
+
+@implementation NSObject (BlockAction)
+
+- (void) setBlockAction:(void (^)(id))blockAction {	objc_setAssociatedObject(self, @selector(blockAction), blockAction, OBJC_ASSOCIATION_COPY);	}
+- (void (^)(id))blockAction { return objc_getAssociatedObject(self,_cmd); }
+- (void) performBlockAction { if (!self.blockAction) return; __block typeof(self) bself = self; self.blockAction(bself); }
+@end
+
 
 typedef NS_ENUM(int, BKObserverContext) {
 	BKObserverContextKey,

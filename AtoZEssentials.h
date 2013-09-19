@@ -13,6 +13,10 @@ typedef void (^BKObservationBlock)(id obj, NSDictionary *change);
 typedef void (^BKMultipleObservationBlock)(id obj, NSString *keyPath, NSDictionary *change);
 
 
+@interface NSObject (BlockAction)
+@property void (^blockAction)(id);
+- (void) performBlockAction;
+@end
 
 /** Blocks wrapper for key-value observation.
 
