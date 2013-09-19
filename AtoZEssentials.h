@@ -17,6 +17,10 @@ typedef void (^BKMultipleObservationBlock)(id obj, NSString *keyPath, NSDictiona
 @property void (^blockAction)(id);
 - (void) performBlockAction;
 @end
+@interface NSMenu (PopUpRegularMenuAdditions)
++ (void)popUpMenu:(NSMenu*)menu forView:(NSView *)view pullsDown:(BOOL)pullsDown;
+@end
+
 
 /** Blocks wrapper for key-value observation.
 

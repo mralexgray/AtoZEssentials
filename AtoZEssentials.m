@@ -6,6 +6,17 @@
 
 
 
+@implementation NSMenu (PopUpRegularMenuAdditions)
++ (void)popUpMenu:(NSMenu *)menu forView:(NSView *)view pullsDown:(BOOL)pullsDown {
+    NSMenu *popMenu = [menu copy];
+    NSRect frame = (NSRect){0,0,[view frame].size.width,[view frame].size.height};
+    if (pullsDown) [popMenu insertItemWithTitle:@"" action:NULL keyEquivalent:@"" atIndex:0];
+    NSPopUpButtonCell *popUpButtonCell = [NSPopUpButtonCell.alloc initTextCell:@"" pullsDown:pullsDown];
+    [popUpButtonCell setMenu:popMenu];
+    if (!pullsDown) [popUpButtonCell selectItem:nil];
+    [popUpButtonCell performClickWithFrame:frame inView:view];
+}
+@end
 
 
 @implementation NSObject (BlockAction)
